@@ -1,0 +1,27 @@
+# ==========================================================
+# Archivo: sshd_config
+# Ruta original: /etc/ssh/sshd_config
+# ==========================================================
+
+# Puerto de escucha seguro (mitigación de escaneos automáticos)
+Port 2222
+AddressFamily any
+ListenAddress 0.0.0.0
+
+# Deshabilitar acceso directo de superusuario root
+PermitRootLogin no
+
+# Autenticación basada en llaves públicas y privadas
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Deshabilitar autenticación por contraseña en texto claro
+PasswordAuthentication no
+PermitEmptyPasswords no
+
+# Seguridad adicional del servicio
+X11Forwarding no
+MaxAuthTries 3
+ClientAliveInterval 300
+ClientAliveCountMax 2
+Subsystem sftp /usr/lib/openssh/sftp-server

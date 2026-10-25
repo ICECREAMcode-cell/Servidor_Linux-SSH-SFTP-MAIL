@@ -1,0 +1,34 @@
+# ==========================================================
+# Archivo: main.cf
+# Ruta original: /etc/postfix/main.cf
+# ==========================================================
+
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+biff = no
+append_dot_mydomain = no
+readme_directory = no
+
+# Parámetros TLS básicos
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_tls_security_level=may
+smtp_tls_security_level=may
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+# Identidad del servidor
+myhostname = mail.flores.local
+mydomain = flores.local
+myorigin = /etc/mailname
+
+# Destinos de entrega local
+mydestination = mail.flores.local, flores.local, localhost.flores.local, localhost
+
+# Configuración de buzón en formato Maildir
+home_mailbox = Maildir/
+
+# Redes de confianza y retransmisión
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 192.168.135.0/24
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+inet_protocols = all
